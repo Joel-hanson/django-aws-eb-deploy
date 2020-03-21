@@ -27,7 +27,8 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-echo `ls`
+echo `ls /root/`
+echo `ls /root/sample_project/`
 
 mkdir /root/.aws
 echo "[profile eb-cli]
