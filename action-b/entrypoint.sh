@@ -1,5 +1,11 @@
 #!/bin/sh -l
 
+echo $python_version
+/root/.pyenv/bin/pyenv install $python_version
+/root/.pyenv/bin/pyenv global $python_version
+/root/.pyenv/bin/pyenv virtualenv $python_version venv
+source /root/.pyenv/versions/venv/bin/activate
+
 pip install flake8
 
 # stop the build if there are Python syntax errors or undefined names
