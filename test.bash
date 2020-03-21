@@ -1,5 +1,11 @@
 asd=false
-if "$asd";
+if $INPUT_FLAKE8;
 then
-echo "Asd"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Running flake8🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+else
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Skipped flake8🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
