@@ -1,11 +1,6 @@
 #!/bin/sh -l
 
 printenv
-echo $python_version
-/root/.pyenv/bin/pyenv install $python_version
-/root/.pyenv/bin/pyenv global $python_version
-/root/.pyenv/bin/pyenv virtualenv $python_version venv
-. /root/.pyenv/versions/venv/bin/activate
 
 pip install flake8
 
