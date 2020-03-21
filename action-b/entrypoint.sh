@@ -24,5 +24,7 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-pip install awscli
-echo `aws --version`
+pip install awsebcli
+echo `eb --version`
+
+eb deploy
