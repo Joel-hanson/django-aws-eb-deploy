@@ -1,0 +1,17 @@
+name: "python tests"
+description: "This is a python action for running test using flake8"
+author: "octocat@github.com"
+
+inputs:
+  IS_TEST_NEEDED:
+    description: "Do we need to run tests?"
+    required: true
+    default: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "cloud"
+  color: "red"
