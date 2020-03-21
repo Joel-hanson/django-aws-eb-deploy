@@ -1,12 +1,16 @@
 name: "python tests"
 description: "This is a python action for running test using flake8"
-author: "octocat@github.com"
+author: "Joel-hanson@github.com"
 
 inputs:
-  IS_TEST_NEEDED:
+  is_test_needed:
     description: "Do we need to run tests?"
     required: true
-    default: true
+    default: "yes"
+  python-version:
+    description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
+    default: '3.x'
+    required: true
 
 runs:
   using: "docker"

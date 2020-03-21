@@ -1,24 +1,17 @@
 name: Python package
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
     - uses: ./action-b
       with:
+        python-version: ${{ matrix.python-version }}
         IS_TEST_NEEDED: true
