@@ -22,7 +22,16 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-# pip install awsebcli
-# echo `eb --version`
+pip install awscli awsebcli
 
-# eb deploy
+echo `eb --version`
+echo `ls`
+
+mkdir /root/.aws
+echo "[profile eb-cli]
+aws_access_key_id = $INPUT_AWS_ACCESS_KEY_ID
+aws_secret_access_key = $INPUT_AWS_SECRET_ACCESS_KEY
+" > ~/.aws/config
+
+cd sample_project
+eb deploy
