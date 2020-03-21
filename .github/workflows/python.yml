@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7.5]
-        # python-version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
+        python_version: [3.7.5]
+        # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
 
     steps:
     - uses: actions/checkout@v2
     - uses: ./action-b
       with:
-        python-version: ${{ matrix.python-version }}
+        python_version: ${{ matrix.python_version }}
         IS_TEST_NEEDED: true
