@@ -7,6 +7,7 @@ pyenv rehash
 pyenv virtualenv $INPUT_PYTHON_VERSION venv
 pyenv activate $INPUT_PYTHON_VERSION
 
+pip install awsebcli==3.17.0 awscli==1.17.0 -q
 
 if $INPUT_FLAKE8;
 then
@@ -21,8 +22,6 @@ else
     echo "🔥🔥🔥🔥Skipped flake8🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
-
-pip install awscli==1.16.9 awsebcli==3.14.4
 
 echo `eb --version`
 echo `ls`
