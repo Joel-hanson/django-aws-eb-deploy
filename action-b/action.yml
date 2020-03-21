@@ -7,7 +7,7 @@ inputs:
     description: "Do we need to run tests?"
     required: true
     default: "yes"
-  python-version:
+  python_version:
     description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
     default: '3.x'
     required: true
