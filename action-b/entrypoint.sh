@@ -27,9 +27,6 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-echo `ls /root/`
-echo `ls /root/sample_project/`
-
 mkdir /root/.aws
 echo "[profile eb-cli]
 aws_access_key_id = $INPUT_AWS_ACCESS_KEY_ID
@@ -37,5 +34,6 @@ aws_secret_access_key = $INPUT_AWS_SECRET_ACCESS_KEY
 " > /root/.aws/config
 
 # cd /root/$INPUT_REPOSITORY_NAME
-cd /root/sample_project
+echo "ls"
+cd sample_project
 eb deploy
