@@ -8,11 +8,6 @@ RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/py
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
-RUN pyenv install $INPUT_PYTHON_VERSION
-RUN pyenv global $INPUT_PYTHON_VERSION
-RUN pyenv rehash
-RUN pyenv virtualenv $INPUT_PYTHON_VERSION venv
-RUN pyenv activate $INPUT_PYTHON_VERSION
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

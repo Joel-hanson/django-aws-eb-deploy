@@ -2,6 +2,13 @@
 
 printenv
 
+pyenv install $INPUT_PYTHON_VERSION
+pyenv global $INPUT_PYTHON_VERSION
+pyenv rehash
+
+pyenv virtualenv $INPUT_PYTHON_VERSION venv
+pyenv activate $INPUT_PYTHON_VERSION
+
 pip install flake8
 
 # stop the build if there are Python syntax errors or undefined names
