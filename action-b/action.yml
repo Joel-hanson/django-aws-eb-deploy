@@ -3,13 +3,14 @@ description: "This is a python action for running test using flake8"
 author: "Joel-hanson@github.com"
 
 inputs:
-  is_test_needed:
+  flask8:
     description: "Do we need to run tests?"
     required: true
-    default: "yes"
+    default: true
+
   python_version:
     description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
-    default: '3.x'
+    default: '3.7.5'
     required: true
 
 runs:

@@ -15,4 +15,4 @@ jobs:
     - uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
-        is_test_needed: true
+        flake8: true
