@@ -15,7 +15,7 @@ then
     echo "🔥🔥🔥🔥Running flake8🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     # stop the build if there are Python syntax errors or undefined names
-    flake8 .
+    flake8 . --exit-zero
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Skipped flake8🔥🔥🔥🔥"
