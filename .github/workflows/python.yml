@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [3.7.5]
+        python_version: [3.6.10]
         # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
 
     steps:
@@ -15,6 +15,7 @@ jobs:
     - uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
-        flake8: true
+        flake8: false
         aws_access_key_id: ${{ secrets.aws_access_key_id }}
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+        repository_name: ${{ github.event.repository.name }}

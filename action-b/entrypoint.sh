@@ -1,11 +1,15 @@
 #!/bin/sh -l
 
+printenv
+
 pyenv install $INPUT_PYTHON_VERSION
 pyenv global $INPUT_PYTHON_VERSION
 pyenv rehash
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 pyenv virtualenv $INPUT_PYTHON_VERSION venv
-pyenv activate $INPUT_PYTHON_VERSION
+pyenv activate venv
 
 pip install awsebcli==3.17.0 awscli==1.17.0 -q
 
@@ -23,7 +27,6 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-echo `eb --version`
 echo `ls`
 
 mkdir /root/.aws
@@ -32,5 +35,5 @@ aws_access_key_id = $INPUT_AWS_ACCESS_KEY_ID
 aws_secret_access_key = $INPUT_AWS_SECRET_ACCESS_KEY
 " > /root/.aws/config
 
-cd sample_project
+cd /root/$INPUT_REPOSITORY_NAME
 eb deploy
