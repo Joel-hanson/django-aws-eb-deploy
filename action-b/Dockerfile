@@ -5,7 +5,7 @@ RUN apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev lib
 
 RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
-ENV PYENV_ROOT $HOME/.pyenv
+ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 RUN pyenv install $INPUT_PYTHON_VERSION
