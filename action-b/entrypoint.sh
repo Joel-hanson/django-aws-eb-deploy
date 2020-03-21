@@ -22,7 +22,7 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-pip install awsebcli
-echo `eb --version`
+# pip install awsebcli
+# echo `eb --version`
 
-eb deploy
+# eb deploy
