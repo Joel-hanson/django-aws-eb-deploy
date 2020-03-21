@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 
+ENV python_version 3.6.0
 RUN apt-get update && apt-get upgrade
 RUN apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev git
 
