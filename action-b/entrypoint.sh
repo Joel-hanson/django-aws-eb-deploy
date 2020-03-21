@@ -34,6 +34,9 @@ aws_secret_access_key = $INPUT_AWS_SECRET_ACCESS_KEY
 " > /root/.aws/config
 
 # cd /root/$INPUT_REPOSITORY_NAME
-echo "ls"
+echo `ls`
+echo `which python`
+echo `python --version`
 cd sample_project
+echo `ls`
 eb deploy
