@@ -45,7 +45,7 @@ if $INPUT_UNIT_TESTING; then
     pip install -r requirements.txt
     pip install coverage
     coverage run manage.py test
-    echo `workspace`
+    echo "workspace"
     echo `ls $GITHUB_WORKSPACE`
     mkdir $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
