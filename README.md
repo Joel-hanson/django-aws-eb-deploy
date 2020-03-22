@@ -1,5 +1,6 @@
-## Welcome to "Hello World" with GitHub Actions
+# Github action for django aws elastic beanstalk deployment
 
-This course will walk you through writing your first action and using it with a workflow file. 
+<p align="left">
+  <a href="https://github.com/Joel-hanson/django-aws-eb-deploy"><img alt="GitHub Actions status" src="https://github.com/Joel-hanson/django-aws-eb-deploy/workflows/Main%20workflow/badge.svg"></a>
+</p>
 
-**Ready to get started? Navigate to the first issue.**
