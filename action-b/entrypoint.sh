@@ -49,6 +49,16 @@ if $INPUT_UNIT_TESTING; then
     pip install -r requirements.txt
     pip install coverage
     coverage run --source='.' manage.py test
+    if [ $? -eq 0 ]; then
+        echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+        echo "🔥🔥🔥🔥Unit test ran successfully🔥🔥🔥🔥"
+        echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    else
+        echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+        echo "🔥🔥🔥🔥Unit test failed🔥🔥🔥🔥"
+        echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+        exit 1
+    fi
     mkdir -p $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
     coverage report >$GITHUB_WORKSPACE/output/coverage_report.txt
