@@ -14,15 +14,15 @@ RUN if $POSGRESQL_REQUIRED; then \
         groupadd -r postgres --gid=999; \
         useradd -r -g postgres --uid=999 --home-dir=/var/lib/postgresql --shell=/bin/bash postgres; \
         mkdir -p /var/lib/postgresql; \
-        chown -R postgres:postgres /var/lib/postgresql;\
-        mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgresql && chmod 2777 /var/run/postgresql;\
+        chown -R postgres:postgres /var/lib/postgresql; \
+        mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgresql && chmod 2777 /var/run/postgresql; \
     fi
 
 RUN if $POSGRESQL_REQUIRED; then \
         apt-get update \
         && apt-get install -y --no-install-recommends git gcc libc-dev python3-dev build-essential libpq-dev postgresql-11 postgresql-client-11 \
         && apt-get purge -y --auto-remove \
-        && rm -rf /var/lib/apt/lists/*\
+        && rm -rf /var/lib/apt/lists/*; \
     fi
 
 USER postgres
