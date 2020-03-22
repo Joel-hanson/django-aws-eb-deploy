@@ -15,7 +15,7 @@ jobs:
     - uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
-        flake8: false
+        flake8: true
         aws_access_key_id: ${{ secrets.aws_access_key_id }}
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
-        repository_name: ${{ github.event.repository.name }}
+        django_path: sample_project

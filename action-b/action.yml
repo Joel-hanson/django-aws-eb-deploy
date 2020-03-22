@@ -13,6 +13,20 @@ inputs:
     default: '3.7.5'
     required: true
 
+  aws_access_key_id:
+    description: "The aws access key id to use"
+    required: true
+
+  aws_secret_access_key:
+    description: "The aws secret access key to use"
+    required: true
+
+  django_path:
+    description: "This is the path at which the your django project is located"
+    required: false
+    default: "."
+
+
 runs:
   using: "docker"
   image: "Dockerfile"

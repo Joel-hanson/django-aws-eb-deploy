@@ -18,7 +18,7 @@ then
     echo "🔥🔥🔥🔥Running flake8🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     # stop the build if there are Python syntax errors or undefined names
-    flake8 . --count --show-source --statistics --exit-zero
+    flake8 . --count --show-source --statistics
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Skipped flake8🔥🔥🔥🔥"
@@ -28,11 +28,10 @@ fi
 aws configure set aws_access_key_id $INPUT_AWS_ACCESS_KEY_ID --profile eb-cli
 aws configure set aws_secret_access_key $INPUT_AWS_SECRET_ACCESS_KEY --profile eb-cli
 
-# cd /root/$INPUT_REPOSITORY_NAME
-echo `ls`
-echo `which python`
-echo `python --version`
-cd sample_project
-echo `ls`
-echo `ls ~/.aws`
+cd $INPUT_DJANGO_PATH
 eb deploy
+
+cd
+mkdir output
+touch output/coverage_report.txt
+echo "🔥🔥🔥🔥" > output/coverage_report.txt
