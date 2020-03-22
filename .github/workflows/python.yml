@@ -1,4 +1,4 @@
-name: Python package
+name: Deployment
 
 on: push
 
@@ -12,7 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: ./action-b
+    - name: Django eb deployment
+      uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
         flake8: true
