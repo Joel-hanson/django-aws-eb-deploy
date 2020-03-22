@@ -20,14 +20,20 @@ jobs:
         aws_access_key_id: ${{ secrets.aws_access_key_id }}
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
         django_path: sample_project
-        unit_testing: true
+        unit_testing: false
         deploy: false
         min_coverage: 50
         posgresql_required: true
         security_check: true
 
-    - name: Upload artifacts
+    - name: Coverage report artifacts
       uses: actions/upload-artifact@v1
       with:
         name: coverage report
         path: output/coverage_report.txt
+
+    - name: Security check report artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: bandit
+        path: output/security_report.txt
