@@ -22,7 +22,7 @@ jobs:
         django_path: sample_project
         unit_testing: true
         deploy: false
-        min_coverage: "80"
+        min_coverage: 80
         posgresql_required: false
         security_check: true
 
