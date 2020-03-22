@@ -36,6 +36,12 @@ fi
 cd $INPUT_DJANGO_PATH
 
 if $INPUT_UNIT_TESTING; then
+    if $INPUT_POSGRESQL_REQUIRED; then
+        service postgresql start
+        export DATABASE_URL='postgresql://docker:docker@127.0.0.1:5432/db'
+        echo "postgresql"
+        echo `/etc/init.d/postgresql status`
+    fi
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
@@ -60,10 +66,6 @@ if $INPUT_UNIT_TESTING; then
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
     coverage report >$GITHUB_WORKSPACE/output/coverage_report.txt
 
-    if $INPUT_POSGRESQL_REQUIRED; then
-        service postgresql start
-        export DATABASE_URL='postgresql://docker:docker@127.0.0.1:5432/db'
-    fi
     if [ $INPUT_MIN_COVERAGE -gt 0 ]; then
         COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')
         if [ $COVERAGE_RESULT -gt $INPUT_MIN_COVERAGE ]; then
