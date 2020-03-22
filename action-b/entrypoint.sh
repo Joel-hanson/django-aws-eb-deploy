@@ -11,7 +11,7 @@ eval "$(pyenv virtualenv-init -)"
 pyenv virtualenv $INPUT_PYTHON_VERSION venv
 pyenv activate venv
 
-pip install awsebcli==3.10.0 awscli==1.17.0
+pip install awscli==1.16.204 awsebcli==3.15.0 colorama==0.3.9
 
 if $INPUT_FLAKE8;
 then
