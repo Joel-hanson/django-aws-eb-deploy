@@ -53,7 +53,7 @@ if $INPUT_UNIT_TESTING; then
 
     if $INPUT_POSGRESQL_REQUIRED; then
         service postgresql start
-        export DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/db'
+        export DATABASE_URL='postgresql://docker:docker@127.0.0.1:5432/db'
     fi
     if [ $INPUT_MIN_COVERAGE -gt 0 ]; then
         COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')

@@ -9,8 +9,8 @@ RUN apt-get update -y && apt-get install -y software-properties-common postgresq
 USER postgres
 
 RUN /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" &&\
-    createdb -O db postgres
+    psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
+    createdb -O db docker
 
 USER root
 
