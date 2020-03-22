@@ -28,7 +28,7 @@ RUN if $POSGRESQL_REQUIRED; then \
 USER postgres
 RUN if $POSGRESQL_REQUIRED; then \
         service postgresql start \
-        && psql -c "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';ALTER USER postgres CREATEDB;"
+        && psql -c "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';ALTER USER postgres CREATEDB;" \
     fi
 
 USER root
