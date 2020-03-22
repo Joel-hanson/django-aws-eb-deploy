@@ -34,4 +34,5 @@ echo `which python`
 echo `python --version`
 cd sample_project
 echo `ls`
+echo `ls /root/.aws`
 eb deploy
