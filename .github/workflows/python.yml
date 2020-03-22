@@ -22,7 +22,7 @@ jobs:
         django_path: sample_project
         unit_testing: true
         deploy: true
-        min_coverage: 50
+        min_coverage: 10
         posgresql_required: true
         security_check: true
         flake8_config_file: "sample_project/.flake8"
