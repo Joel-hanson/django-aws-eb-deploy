@@ -1,4 +1,4 @@
-name: "python tests"
+name: "Elastic beanstalk django deployment action"
 description: "This is a python action for running test using flake8"
 author: "Joel-hanson@github.com"
 
@@ -25,6 +25,16 @@ inputs:
     description: "This is the path at which the your django project is located"
     required: false
     default: "."
+
+  unit_testing:
+    description: "Weather to run unit tests"
+    required: false
+    default: false
+
+  deploy:
+    description: "Deploy to elasticbeanstalk"
+    required: true
+    default: true
 
 
 runs:

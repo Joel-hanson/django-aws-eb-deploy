@@ -1,5 +1,5 @@
 #!/bin/sh -l
-TESTING=true
+
 pyenv install $INPUT_PYTHON_VERSION
 pyenv global $INPUT_PYTHON_VERSION
 pyenv rehash
@@ -24,17 +24,38 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
+if [ $? -eq 0 ]; then
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Flake8 passed🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    exit 1
+else
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Flake8 failed🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+fi
+
 aws configure set aws_access_key_id $INPUT_AWS_ACCESS_KEY_ID --profile eb-cli
 aws configure set aws_secret_access_key $INPUT_AWS_SECRET_ACCESS_KEY --profile eb-cli
 
 cd $INPUT_DJANGO_PATH
-if $TESTING; then
-    echo "🔥🔥🔥🔥🔥🔥🔥Deployed🔥🔥🔥🔥🔥🔥🔥🔥"
+
+if $INPUT_UNIT_TESTING; then
+    echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
+    pip install -r requirements.txt
+    pip install coverage
+    coverage run manage.py test
+    echo `workspace`
+    echo `ls $GITHUB_WORKSPACE`
+    mkdir $GITHUB_WORKSPACE/output
+    touch $GITHUB_WORKSPACE/output/coverage_report.txt
+    coverage report > $GITHUB_WORKSPACE/output/coverage_report.txt
 else
-    eb deploy
+    echo "🔥🔥🔥🔥🔥🔥🔥Skipping unit test🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-cd
-mkdir output
-touch output/coverage_report.txt
-echo "🔥🔥🔥🔥" >output/coverage_report.txt
+if $INPUT_DEPLOY; then
+    eb deploy
+else
+    echo "🔥🔥🔥🔥🔥🔥🔥Skipping deploy🔥🔥🔥🔥🔥🔥🔥🔥"
+fi
