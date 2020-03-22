@@ -57,13 +57,15 @@ if $INPUT_UNIT_TESTING; then
     fi
     if [ $INPUT_MIN_COVERAGE -gt 0 ]; then
         COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')
-        if [[ $COVERAGE_RESULT -gt $MIN_COVERAGE ]]; then
+        echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
+        
+        if [ $COVERAGE_RESULT -gt $INPUT_MIN_COVERAGE ]; then
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
             echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
         else
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-            echo "🔥Code coverage below allowed threshold ($COVERAGE_RESULT<$MIN_COVERAGE)🔥"
+            echo "🔥Code coverage below allowed threshold ($COVERAGE_RESULT<$INPUT_MIN_COVERAGE)🔥"
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
             exit 1
         fi

@@ -1,2 +1,2 @@
 Django==2.1.1
-psycopg2>=2.7,<3.0
+psycopg2
