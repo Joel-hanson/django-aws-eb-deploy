@@ -10,7 +10,7 @@ inputs:
 
   python_version:
     description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
-    default: '3.7.5'
+    default: "3.7.5"
     required: true
 
   aws_access_key_id:
@@ -46,7 +46,7 @@ inputs:
     required: false
     default: false
 
-posgresql_required:
+  security_check:
     description: "Security oriented static analyser for python code using bandit"
     required: false
     default: false
@@ -54,8 +54,8 @@ posgresql_required:
 runs:
   using: "docker"
   image: "Dockerfile"
-  args:
-    - POSGRESQL_REQUIRED: ${{ inputs.posgresql_required }}
+  env:
+    POSGRESQL_REQUIRED: ${{ inputs.posgresql_required }}
 
 branding:
   icon: "cloud"
