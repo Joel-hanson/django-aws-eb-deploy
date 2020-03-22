@@ -25,8 +25,9 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
-aws configure set aws_access_key_id AKIAWH2M4QZB4N2CCMPF --profile eb-cli
-aws configure set aws_secret_access_key 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 --profile eb-cli
+echo "[eb-cli]
+aws_access_key_id = $INPUT_AWS_ACCESS_KEY_ID
+aws_secret_access_key = $INPUT_AWS_SECRET_ACCESS_KEY" > /root/.aws/credentials
 
 # cd /root/$INPUT_REPOSITORY_NAME
 echo `ls`
