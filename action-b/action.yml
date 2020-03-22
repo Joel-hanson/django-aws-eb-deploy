@@ -8,6 +8,11 @@ inputs:
     required: true
     default: true
 
+  flake8_config_file:
+    description: "The flake8 config path relative to the github repository"
+    required: false
+    default: ".flake8"
+
   python_version:
     description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
     default: "3.7.5"

@@ -25,6 +25,7 @@ jobs:
         min_coverage: 50
         posgresql_required: true
         security_check: true
+        flake8_config_file: "sample_project/.flake8"
 
     - name: Coverage report artifacts
       uses: actions/upload-artifact@v1

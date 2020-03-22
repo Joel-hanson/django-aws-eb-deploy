@@ -17,7 +17,7 @@ if $INPUT_FLAKE8; then
     echo "🔥🔥🔥🔥Running flake8🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     # stop the build if there are Python syntax errors or undefined names
-    flake8 . --count --show-source --statistics
+    flake8 . --count --show-source --statistics ---config $INPUT_FLAKE8_CONFIG_FILE
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Skipping flake8🔥🔥🔥🔥"
