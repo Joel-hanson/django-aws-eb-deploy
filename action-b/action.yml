@@ -22,7 +22,7 @@ inputs:
     required: true
 
   django_path:
-    description: "This is the path at which the your django project is located"
+    description: "This is the path at which the your django project is located in you github repo"
     required: false
     default: "."
 
@@ -31,15 +31,31 @@ inputs:
     required: false
     default: false
 
+  min_coverage:
+    description: "Minimum code coverage required"
+    required: false
+    default: "0"
+
   deploy:
     description: "Deploy to elasticbeanstalk"
     required: true
     default: true
 
+  posgresql_required:
+    description: "Run tests with postgresql"
+    required: false
+    default: false
+
+posgresql_required:
+    description: "Security oriented static analyser for python code using bandit"
+    required: false
+    default: false
 
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - POSGRESQL_REQUIRED: ${{ inputs.posgresql_required }}
 
 branding:
   icon: "cloud"

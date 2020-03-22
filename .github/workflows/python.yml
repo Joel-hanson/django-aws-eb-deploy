@@ -16,12 +16,16 @@ jobs:
       uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
-        flake8: false
+        flake8: true
         aws_access_key_id: ${{ secrets.aws_access_key_id }}
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
         django_path: sample_project
         unit_testing: true
         deploy: false
+        min_coverage: "80"
+        posgresql_required: false
+        security_check: true
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:

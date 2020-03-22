@@ -20,7 +20,7 @@ if $INPUT_FLAKE8; then
     flake8 . --count --show-source --statistics
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-    echo "🔥🔥🔥🔥Skipped flake8🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Skipping flake8🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
@@ -28,11 +28,11 @@ if [ $? -eq 0 ]; then
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Flake8 passed🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-    exit 1
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Flake8 failed🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    exit 1
 fi
 
 aws configure set aws_access_key_id $INPUT_AWS_ACCESS_KEY_ID --profile eb-cli
@@ -41,19 +41,61 @@ aws configure set aws_secret_access_key $INPUT_AWS_SECRET_ACCESS_KEY --profile e
 cd $INPUT_DJANGO_PATH
 
 if $INPUT_UNIT_TESTING; then
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     pip install -r requirements.txt
     pip install coverage
-    coverage run  --source='.' manage.py test
+    coverage run --source='.' manage.py test
     mkdir $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
-    coverage report > $GITHUB_WORKSPACE/output/coverage_report.txt
+    coverage report >$GITHUB_WORKSPACE/output/coverage_report.txt
+
+    if $INPUT_POSGRESQL_REQUIRED; then
+        service postgresql start
+        export DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/test'
+    fi
+    if [ $INPUT_MIN_COVERAGE -gt 0 ]; then
+        COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')
+        if [[ $COVERAGE_RESULT -gt $MIN_COVERAGE ]]; then
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+            echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+        else
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+            echo "🔥Code coverage below allowed threshold ($COVERAGE_RESULT<$MIN_COVERAGE)🔥"
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+            exit 1
+        fi
+    fi
+
 else
-    echo "🔥🔥🔥🔥🔥🔥🔥Skipping unit test🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥Skipping unit test🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+fi
+
+if $INPUT_SECURITY_CHECK; then
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥Running security check🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    mkdir $GITHUB_WORKSPACE/output
+    touch $GITHUB_WORKSPACE/output/security_report.txt
+    bandit -r . -o $GITHUB_WORKSPACE/output/security_report.txt -f 'txt'
+    cat $GITHUB_WORKSPACE/output/security_report.txt
+else
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥Skipping security check🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
 
 if $INPUT_DEPLOY; then
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥Deploying🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     eb deploy
 else
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥Skipping deploy🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 fi
