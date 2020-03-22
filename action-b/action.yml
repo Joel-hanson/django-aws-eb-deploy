@@ -54,8 +54,6 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env:
-    POSGRESQL_REQUIRED: ${{ inputs.posgresql_required }}
 
 branding:
   icon: "cloud"

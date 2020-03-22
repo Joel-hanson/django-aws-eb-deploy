@@ -23,7 +23,7 @@ jobs:
         unit_testing: true
         deploy: false
         min_coverage: 80
-        posgresql_required: false
+        posgresql_required: true
         security_check: true
 
     - name: Upload artifacts

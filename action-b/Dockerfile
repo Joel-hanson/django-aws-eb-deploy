@@ -1,37 +1,23 @@
 FROM ubuntu:18.04
 
-RUN echo `printenv`
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 RUN apt-get update && apt-get upgrade
+RUN apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+
+USER postgres
+
+RUN    /etc/init.d/postgresql start &&\
+    psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" &&\
+    createdb -O db postgres
+
+
 RUN apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev git
 
 RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-
-RUN if $POSGRESQL_REQUIRED; then \
-        set -eux; \
-        groupadd -r postgres --gid=999; \
-        useradd -r -g postgres --uid=999 --home-dir=/var/lib/postgresql --shell=/bin/bash postgres; \
-        mkdir -p /var/lib/postgresql; \
-        chown -R postgres:postgres /var/lib/postgresql; \
-        mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgresql && chmod 2777 /var/run/postgresql; \
-    fi
-
-RUN if $POSGRESQL_REQUIRED; then \
-        apt-get update \
-        && apt-get install -y --no-install-recommends git gcc libc-dev python3-dev build-essential libpq-dev postgresql-11 postgresql-client-11 \
-        && apt-get purge -y --auto-remove \
-        && rm -rf /var/lib/apt/lists/*; \
-    fi
-
-USER postgres
-RUN if $POSGRESQL_REQUIRED; then \
-        service postgresql start \
-        && psql -c "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';ALTER USER postgres CREATEDB;" \
-    fi
-
-USER root
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
