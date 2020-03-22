@@ -16,7 +16,7 @@ jobs:
       uses: ./action-b
       with:
         python_version: ${{ matrix.python_version }}
-        flake8: false
+        flake8: true
         aws_access_key_id: ${{ secrets.aws_access_key_id }}
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
         django_path: sample_project
@@ -24,7 +24,7 @@ jobs:
         deploy: false
         min_coverage: 50
         posgresql_required: true
-        security_check: false
+        security_check: true
 
     - name: Coverage report artifacts
       uses: actions/upload-artifact@v1
