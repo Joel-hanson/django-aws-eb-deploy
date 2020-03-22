@@ -9,8 +9,6 @@ eval "$(pyenv virtualenv-init -)"
 pyenv virtualenv $INPUT_PYTHON_VERSION venv
 pyenv activate venv
 
-pip install awscli==1.15.83 awsebcli==3.10.0 colorama==0.3.7 'botocore<1.12'
-
 if $INPUT_FLAKE8; then
     pip install flake8
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
@@ -44,9 +42,10 @@ if $INPUT_UNIT_TESTING; then
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-    echo `ls`
-    echo `ls ~/sample_project`
-    echo `ls ~/sample_project/sample_project`
+    echo `ls -a`
+    echo `ls -a $GITHUB_WORKSPACE`
+    echo `ls -a $GITHUB_WORKSPACE/sample_project/`
+    echo `ls -a $GITHUB_WORKSPACE/sample_project/sample_project/`
     pip install -r requirements.txt
     pip install coverage
     coverage run --source='.' manage.py test
@@ -105,6 +104,7 @@ else
 fi
 
 if $INPUT_DEPLOY; then
+    pip install awscli==1.15.83 awsebcli==3.10.0 colorama==0.3.7 'botocore<1.12'
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥Deploying🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
