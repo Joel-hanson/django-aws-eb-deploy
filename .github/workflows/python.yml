@@ -1,0 +1,40 @@
+name: Deployment
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: [3.6.10]
+        # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Django eb deployment
+      uses: ./action-b
+      with:
+        python_version: ${{ matrix.python_version }}
+        flake8: true
+        aws_access_key_id: ${{ secrets.aws_access_key_id }}
+        aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+        django_path: sample_project
+        unit_testing: true
+        deploy: true
+        min_coverage: 10
+        posgresql_required: true
+        security_check: true
+        flake8_config_file: "sample_project/.flake8"
+
+    - name: Coverage report artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: coverage report
+        path: output/coverage_report.txt
+
+    - name: Security check report artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: bandit
+        path: output/security_report.txt

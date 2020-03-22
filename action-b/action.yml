@@ -1,0 +1,65 @@
+name: "Elastic beanstalk django deployment action"
+description: "This is a python action for running test using flake8"
+author: "Joel-hanson@github.com"
+
+inputs:
+  flask8:
+    description: "Do we need to run tests?"
+    required: true
+    default: true
+
+  flake8_config_file:
+    description: "The flake8 config path relative to the github repository"
+    required: false
+    default: ".flake8"
+
+  python_version:
+    description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
+    default: "3.7.5"
+    required: true
+
+  aws_access_key_id:
+    description: "The aws access key id to use"
+    required: true
+
+  aws_secret_access_key:
+    description: "The aws secret access key to use"
+    required: true
+
+  django_path:
+    description: "This is the path at which the your django project is located in you github repo"
+    required: false
+    default: "."
+
+  unit_testing:
+    description: "Weather to run unit tests"
+    required: false
+    default: false
+
+  min_coverage:
+    description: "Minimum code coverage required"
+    required: false
+    default: "0"
+
+  deploy:
+    description: "Deploy to elasticbeanstalk"
+    required: true
+    default: true
+
+  posgresql_required:
+    description: "Run tests with postgresql"
+    required: false
+    default: false
+
+  security_check:
+    description: "Security oriented static analyser for python code using bandit"
+    required: false
+    default: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "cloud"
+  color: "red"
