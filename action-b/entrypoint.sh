@@ -59,11 +59,11 @@ if $INPUT_UNIT_TESTING; then
         COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')
         if [ $COVERAGE_RESULT -gt $INPUT_MIN_COVERAGE ]; then
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-            echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
+            echo "🔥🔥🔥🔥You have a coverage of $COVERAGE_RESULT 🔥🔥🔥🔥"
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
         else
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-            echo "🔥Code coverage below allowed threshold ($COVERAGE_RESULT<$INPUT_MIN_COVERAGE)🔥"
+            echo "🔥🔥🔥🔥Code coverage below allowed threshold ($COVERAGE_RESULT<$INPUT_MIN_COVERAGE)🔥🔥🔥🔥s"
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
             exit 1
         fi
@@ -83,7 +83,6 @@ if $INPUT_SECURITY_CHECK; then
     mkdir -p $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/security_report.txt
     bandit -r . -o $GITHUB_WORKSPACE/output/security_report.txt -f 'txt'
-    cat $GITHUB_WORKSPACE/output/security_report.txt
 else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥Skipping security check🔥🔥🔥🔥🔥🔥"
@@ -98,6 +97,7 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥Security check failed🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    cat $GITHUB_WORKSPACE/output/security_report.txt
     exit 1
 fi
 
