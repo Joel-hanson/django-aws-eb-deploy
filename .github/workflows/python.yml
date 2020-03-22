@@ -24,7 +24,7 @@ jobs:
         deploy: false
         min_coverage: 50
         posgresql_required: true
-        security_check: true
+        security_check: false
 
     - name: Coverage report artifacts
       uses: actions/upload-artifact@v1
