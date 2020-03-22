@@ -44,9 +44,7 @@ if $INPUT_UNIT_TESTING; then
     echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
     pip install -r requirements.txt
     pip install coverage
-    coverage run manage.py test
-    echo "workspace"
-    echo `ls $GITHUB_WORKSPACE`
+    coverage run  --source='.' manage.py test
     mkdir $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
     coverage report > $GITHUB_WORKSPACE/output/coverage_report.txt
