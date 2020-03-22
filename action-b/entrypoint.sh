@@ -1,7 +1,5 @@
 #!/bin/sh -l
 
-printenv
-
 pyenv install $INPUT_PYTHON_VERSION
 pyenv global $INPUT_PYTHON_VERSION
 pyenv rehash
@@ -10,6 +8,8 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 pyenv virtualenv $INPUT_PYTHON_VERSION venv
 pyenv activate venv
+
+PYTHONIOENCODING=utf-8
 
 pip install awscli==1.16.204 awsebcli==3.15.0 colorama==0.3.9
 
