@@ -33,9 +33,6 @@ else
     exit 1
 fi
 
-aws configure set aws_access_key_id $INPUT_AWS_ACCESS_KEY_ID --profile eb-cli
-aws configure set aws_secret_access_key $INPUT_AWS_SECRET_ACCESS_KEY --profile eb-cli
-
 cd $INPUT_DJANGO_PATH
 
 if $INPUT_UNIT_TESTING; then
@@ -115,6 +112,9 @@ fi
 
 if $INPUT_DEPLOY; then
     pip install awscli==1.15.83 awsebcli==3.10.0 colorama==0.3.7 'botocore<1.12'
+    aws configure set aws_access_key_id $INPUT_AWS_ACCESS_KEY_ID --profile eb-cli
+    aws configure set aws_secret_access_key $INPUT_AWS_SECRET_ACCESS_KEY --profile eb-cli
+
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥Deploying🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
