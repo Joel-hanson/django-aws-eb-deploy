@@ -47,7 +47,7 @@ if $INPUT_UNIT_TESTING; then
     pip install -r requirements.txt
     pip install coverage
     coverage run --source='.' manage.py test
-    mkdir $GITHUB_WORKSPACE/output
+    mkdir -p $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/coverage_report.txt
     coverage report >$GITHUB_WORKSPACE/output/coverage_report.txt
 
@@ -57,8 +57,6 @@ if $INPUT_UNIT_TESTING; then
     fi
     if [ $INPUT_MIN_COVERAGE -gt 0 ]; then
         COVERAGE_RESULT=$(coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g')
-        echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
-        
         if [ $COVERAGE_RESULT -gt $INPUT_MIN_COVERAGE ]; then
             echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
             echo "🔥You have a coverage of $COVERAGE_RESULT 🔥"
@@ -81,7 +79,8 @@ if $INPUT_SECURITY_CHECK; then
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥Running security check🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-    mkdir $GITHUB_WORKSPACE/output
+    pip install bandit
+    mkdir -p $GITHUB_WORKSPACE/output
     touch $GITHUB_WORKSPACE/output/security_report.txt
     bandit -r . -o $GITHUB_WORKSPACE/output/security_report.txt -f 'txt'
     cat $GITHUB_WORKSPACE/output/security_report.txt
@@ -89,6 +88,17 @@ else
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥Skipping security check🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+fi
+
+if [ $? -eq 0 ]; then
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Security check passed🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+else
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥Security check failed🔥🔥🔥🔥"
+    echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    exit 1
 fi
 
 if $INPUT_DEPLOY; then
