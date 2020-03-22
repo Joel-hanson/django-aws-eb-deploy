@@ -44,6 +44,9 @@ if $INPUT_UNIT_TESTING; then
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥Running unit test🔥🔥🔥🔥🔥🔥🔥🔥"
     echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+    echo `ls`
+    echo `ls ~/sample_project`
+    echo `ls ~/sample_project/sample_project`
     pip install -r requirements.txt
     pip install coverage
     coverage run --source='.' manage.py test
