@@ -1,5 +1,5 @@
-name: "Elastic beanstalk django deployment action"
-description: "This is a python action for running test using flake8"
+name: "AWS Elastic beanstalk django deployment"
+description: "Github action for deploying the Django project to Elastic beanstalk after running some basic continuous integrations."
 author: "Joel-hanson@github.com"
 
 inputs:
