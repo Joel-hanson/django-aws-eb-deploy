@@ -61,5 +61,5 @@ runs:
   image: "Dockerfile"
 
 branding:
-  icon: "cloud"
+  icon: "upload-cloud"
   color: "red"
