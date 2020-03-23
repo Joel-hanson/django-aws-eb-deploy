@@ -12,8 +12,17 @@
 ![Deployment](https://github.com/Joel-hanson/django-aws-eb-deploy/workflows/Deployment/badge.svg?branch=master)
 </div>
 <p align="center">
-  This <a href="https://github.com/features/actions">GitHub Action</a> will deploy your project to <a href="https://aws.amazon.com/elasticbeanstalk/">AWS Elastic beanstalk</a>. It can be configured to upload your production-ready code into any branch you'd like, and even make multiple deployments it to different environments like staging or uat environments. You can also run linting, testing and security checks before deploying. And also you can download the reports of the coverage and the security checks as artifacts.
+  This <a href="https://github.com/features/actions">GitHub Action</a> will deploy your Django project to <a href="https://aws.amazon.com/elasticbeanstalk/">AWS Elastic beanstalk</a>. It can be configured to upload your production-ready code into any branch you'd like, and even make multiple deployments it to different environments like staging or uat environments. You can also run linting, testing and security checks before deploying. And also you can download the reports of the coverage and the security checks as artifacts.
 </p>
+
+This action has the following features:
+- Deploy Django project to elasticbeanstalk.
+- Run unit tests.
+- Download coverage reports.
+- Run security checks using bandit.
+- Download security checks report.
+- Run linting using flake8.
+
 
 <p align="center">
   <img src="./assets/screenshot.png">
@@ -244,9 +253,6 @@ name: Deployment
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
     branches:
       - master
 jobs:
