@@ -4,26 +4,26 @@ author: "Joel-hanson@github.com"
 
 inputs:
   flask8:
-    description: "Do we need to run tests?"
+    description: "Do we need to run flake8 linting?"
     required: true
     default: true
 
   flake8_config_file:
-    description: "The flake8 config path relative to the github repository"
+    description: "The flake8 config path relative to the github repository (this requires input flake8 to be true)"
     required: false
     default: ".flake8"
 
   python_version:
     description: "Version range or exact version of a Python version to use, using SemVer's version range syntax."
-    default: "3.7.5"
+    default: "3.6.10"
     required: true
 
   aws_access_key_id:
-    description: "The aws access key id to use"
+    description: "The AWS access key"
     required: true
 
   aws_secret_access_key:
-    description: "The aws secret access key to use"
+    description: "The AWS secret access key"
     required: true
 
   django_path:
@@ -32,7 +32,7 @@ inputs:
     default: "."
 
   unit_testing:
-    description: "Weather to run unit tests"
+    description: "Whether to run unit tests"
     required: false
     default: false
 
@@ -42,12 +42,12 @@ inputs:
     default: "0"
 
   deploy:
-    description: "Deploy to elasticbeanstalk"
+    description: "Deploy to AWS Elastic beanstalk"
     required: true
     default: true
 
-  posgresql_required:
-    description: "Run tests with postgresql"
+  postgresql_required:
+    description: "Run unit tests with postgresql"
     required: false
     default: false
 
@@ -61,5 +61,5 @@ runs:
   image: "Dockerfile"
 
 branding:
-  icon: "cloud"
+  icon: "upload-cloud"
   color: "red"
