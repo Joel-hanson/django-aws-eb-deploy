@@ -46,7 +46,7 @@ inputs:
     required: true
     default: true
 
-  posgresql_required:
+  postgresql_required:
     description: "Run unit tests with postgresql"
     required: false
     default: false
