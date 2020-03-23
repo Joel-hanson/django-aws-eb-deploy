@@ -1,7 +1,3 @@
-# Github action for django aws elastic beanstalk deployment
-
-![Deployment](https://github.com/Joel-hanson/django-aws-eb-deploy/workflows/Deployment/badge.svg?branch=master)
-
 <p align="center">
   <a href="https://github.com/marketplace/actions/elastic-beanstalk-django-deployment-action">
     <img width="150px" src="./assets/eb_icon.webp">
@@ -12,6 +8,9 @@
   Github action for deploying the Django project to Elastic beanstalk.
 </h1>
 
+<div align="center">
+![Deployment](https://github.com/Joel-hanson/django-aws-eb-deploy/workflows/Deployment/badge.svg?branch=master)
+</div>
 <p align="center">
   This <a href="https://github.com/features/actions">GitHub Action</a> will deploy your project to <a href="https://aws.amazon.com/elasticbeanstalk/">AWS Elastic beanstalk</a>. It can be configured to upload your production-ready code into any branch you'd like, and even make multiple deployments it to different environments like staging or uat environments. You can also run linting, testing and security checks before deploying. And also you can download the reports of the coverage and the security checks as artifacts.
 </p>
@@ -40,8 +39,6 @@ It is **important** to have the Elastic beanstalk `config.yml` of your project w
         security_check: true
         flake8_config_file: "sample_project/.flake8"
 ```
-
-![Deployment](https://github.com/Joel-hanson/django-aws-eb-deploy/workflows/Deployment/badge.svg?branch=master)
 
 
 ### Getting Started :airplane:
