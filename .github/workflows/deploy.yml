@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Django aws eb deployment
-      uses: joel-hanson/django-aws-eb-deploy@V1
+      uses: ./
       with:
         python_version: ${{ matrix.python_version }}
         flake8: true
