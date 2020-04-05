@@ -1,6 +1,6 @@
 FROM python:3.8-slim-buster
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y gnupg2 wget curl git sysstat libssl-dev libssl1.1.1f-1 openssl/trusty
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y gnupg2 wget curl git sysstat
 
 RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - 
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
