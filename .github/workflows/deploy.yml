@@ -26,7 +26,7 @@ jobs:
         aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
         django_path: sample_project
         unit_testing: true
-        deploy: true
+        deploy: false
         min_coverage: 10
         postgresql_required: true
         security_check: true
