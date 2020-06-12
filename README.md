@@ -33,7 +33,7 @@ It is **important** to have the Elastic beanstalk `config.yml` of your project w
 
 ```yml
     - name: Django aws eb deployment
-      uses: joel-hanson/django-aws-eb-deploy@V1
+      uses: joel-hanson/django-aws-eb-deploy@V1.1
       with:
         python_version: ${{ matrix.python_version }}
         flake8: true
@@ -74,7 +74,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Django aws eb deployment
-      uses: joel-hanson/django-aws-eb-deploy@V1
+      uses: joel-hanson/django-aws-eb-deploy@V1.1
       with:
         python_version: ${{ matrix.python_version }}
         flake8: true
@@ -265,7 +265,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Django aws eb deployment
-      uses: joel-hanson/django-aws-eb-deploy@V1
+      uses: joel-hanson/django-aws-eb-deploy@V1.1
       with:
         python_version: ${{ matrix.python_version }}
         flake8: true
