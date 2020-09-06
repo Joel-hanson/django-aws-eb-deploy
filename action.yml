@@ -3,7 +3,7 @@ description: "Github action for deploying the Django project to Elastic beanstal
 author: "Joel-hanson@github.com"
 
 inputs:
-  flask8:
+  flake8:
     description: "Do we need to run flake8 linting?"
     required: true
     default: true
