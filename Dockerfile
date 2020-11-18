@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 
+RUN sudo apt install ca-certificates
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install gnupg2 wget
 
 RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - 
