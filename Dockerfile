@@ -1,11 +1,11 @@
 FROM ubuntu:18.04
 
-RUN apt install -y ca-certificates
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install gnupg2 wget
 
 RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - 
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 RUN apt-get -y update && apt-get -y install software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+RUN apt install -y ca-certificates
 
 USER postgres
 
