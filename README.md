@@ -29,7 +29,7 @@ This action has the following features:
 
 ## Usage
 
-It is **important** to have the Elastic beanstalk `config.yml` of your project with its AWS credentials. 
+It is **important** to have the Elastic beanstalk `config.yml` of your project with its AWS credentials.
 
 ```yml
     - name: Django aws eb deployment
@@ -68,8 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [3.6.10]
-        # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
+        python_version: [3.7.17]
 
     steps:
     - uses: actions/checkout@v2
@@ -117,7 +116,7 @@ In addition to the deployment options you must also configure the following.
 | Key                | Value Information                                                                                                                                                                                                                                                                                                                                     | Type   | Required | Default |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- | -------- |
 | `FLAKE8` | This boolean flag to whether to run flake8 linting for our project.                                                                                                                                                                                   | `with` | **No**  | false  |
-| `PYTHON_VERSION` | Version range or exact version of a Python version to use, using SemVer's version range syntax. | `with` | **Yes**  | 3.6.10  |
+| `PYTHON_VERSION` | Version range or exact version of a Python version to use, using SemVer's version range syntax. | `with` | **Yes**  | 3.7.17  |
 | `FLAKE8_CONFIG_FILE` | The flake8 config path relative to the github repository (this requires input flake8 to be true). | `with` | **No**  | ".flake8"  |
 | `DEPLOY` | Deploy to AWS Elastic beanstalk. | `with` | **Yes**  | true  |
 
@@ -259,8 +258,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [3.6.10]
-        # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
+        python_version: [3.7.17]
 
     steps:
     - uses: actions/checkout@v2

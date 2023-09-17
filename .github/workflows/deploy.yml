@@ -12,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [3.6.10]
-        # python_version: [3.5.7, 3.6.10, 3.7.5, 3.8.2]
+        python_version: [3.7.17]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Django aws eb deployment
       uses: ./
       with:
@@ -33,21 +32,24 @@ jobs:
         flake8_config_file: "sample_project/.flake8"
 
     - name: Coverage report artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: coverage report
         path: output/coverage_report.txt
+        if-no-files-found: warn
 
     - name: Coverage report artifacts if failed
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: coverage report if failed
         path: output/coverage_report.txt
+        if-no-files-found: warn
 
     - name: Security check report artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: bandit
         path: output/security_report.txt
+        if-no-files-found: warn
